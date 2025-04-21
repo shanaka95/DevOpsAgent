@@ -1,0 +1,10 @@
+abcxyzdocuments
+foodpod
+images
+kiosk
+shanaka
+smartlocker
+smartpod
+smartroom
+smartroom2
+tasks
