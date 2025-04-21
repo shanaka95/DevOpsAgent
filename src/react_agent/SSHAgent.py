@@ -38,7 +38,7 @@ class SSHAgent:
                     self.output_buffer += output
 
                 # Auto-handle common interactive prompts
-                if "press RETURN" in output or "press enter" in output.lower():
+                if "return" in output.lower() or "enter" in output.lower():
                     self.shell.send('\n')
 
             time.sleep(0.1)

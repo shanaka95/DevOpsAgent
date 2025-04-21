@@ -3,13 +3,17 @@
 from langchain.chat_models import init_chat_model
 from langchain_core.language_models import BaseChatModel
 from langchain_core.messages import BaseMessage
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 from langchain_anthropic import ChatAnthropic
 from langchain_core.language_models import BaseLanguageModel
 from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
 from langchain_openai import ChatOpenAI
+from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
 
+import asyncio
+
+import os
 
 def get_message_text(msg: BaseMessage) -> str:
     """Get the text content of a message."""
@@ -37,6 +41,11 @@ def load_chat_model(
     provider, model_name = model_name_or_path.split("/", 1)
 
     if provider == "anthropic":
+        import os
+        anthropic_api_key = os.environ.get("ANTHROPIC_API_KEY")
+        if not anthropic_api_key:
+            raise ValueError("ANTHROPIC_API_KEY environment variable is required for Anthropic models")
+    
         return ChatAnthropic(model=model_name)
     elif provider == "openai":
         return ChatOpenAI(model=model_name)

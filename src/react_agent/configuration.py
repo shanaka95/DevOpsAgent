@@ -57,7 +57,14 @@ class Configuration:
             "description": "The number of most recent messages to keep without summarization."
         },
     )
-
+    
+    max_recursion: int = field(
+        default=100,
+        metadata={
+            "description": "The maximum number of recursive calls to make."
+        },
+        
+    )
     @classmethod
     def from_runnable_config(
         cls, config: Optional[RunnableConfig] = None
